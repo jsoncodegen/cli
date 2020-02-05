@@ -1,0 +1,36 @@
+{
+	"name": "jsoncodegen",
+	"description": "JSON code generator CLI.",
+	"version": "1.0.0",
+	"author": {
+		"name": "András Parditka"
+	},
+	"license": "MIT",
+	"bin": "./dist/cli.js",
+	"main": "./dist/index.js",
+	"dependencies": {
+		"glob": "^7.1.6",
+		"lodash": "^4.17.15",
+		"mkdirp": "^0.5.1",
+		"rimraf": "^3.0.0",
+		"yargs": "^14.2.0"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/jest": "^24.0.23",
+		"@types/lodash": "^4.14.146",
+		"@types/mkdirp": "^0.5.2",
+		"@types/node": "^12.12.7",
+		"@types/rimraf": "^2.0.3",
+		"@types/yargs": "^13.0.3",
+		"jest": "^24.9.0",
+		"jsoncodegen-types-for-generator": "^1.0.0",
+		"ts-jest": "^24.1.0",
+		"typescript": "^3.7.2"
+	},
+	"scripts": {
+		"compile": "rimraf dist && tsc -p .",
+		"watch": "rimraf dist && tsc -p . -w",
+		"test": "jest"
+	}
+}
