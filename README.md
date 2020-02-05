@@ -316,6 +316,60 @@ jsoncodegen --generator typescript --inputDir src --outputDir build --config jso
 
 For available options, please check the documentation of the generator.
 
+## Write your own generator
+
+The `--generator` option also accepts a relative path to a JS file. Example:
+
+```
+jsoncodegen --generator ./my-generator.js --inputDir src --outputDir build
+```
+
+Have a look at https://github.com/jsoncodegen/types-for-generator to get an idea about the expected shape of a generator. You can install the types like this:
+
+```
+npm i -D jsoncodegen-types-for-generator
+```
+
+Generators should implement the IGenerator interface:
+
+```TS
+import { IGenerator, IGeneratorResult } from 'jsoncodegen-types-for-generator'
+
+interface IConfig {
+  // ... any configuration
+}
+
+const generator: IGenerator = {
+  async generate(config: IConfig, namedTypesById) {
+    let result: IGeneratorResult[] = []
+    for (const namedType of namedTypesById.values()) {
+      switch (namedType.kind) {
+        case 'Interface':
+        case 'NumberEnum':
+        case 'StringEnum':
+          result.push({
+            filePath: [
+              ...namedType.directoryPath,
+              namedType.name + '.java',
+            ],
+            content: '...',
+          })
+          break
+      }
+    }
+    return result
+  },
+}
+
+module.exports = generator
+```
+
+Also, https://github.com/jsoncodegen/test-json has sample JSON you can use to test the output of your generator. You can install the sample JSON like this:
+
+```
+npm i -D jsoncodegen-test-json
+```
+
 ## Licence
 
 MIT
