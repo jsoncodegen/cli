@@ -8,6 +8,14 @@
 	"license": "MIT",
 	"bin": "./dist/cli.js",
 	"main": "./dist/index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jsoncodegen/cli.git"
+	},
+	"homepage": "https://github.com/jsoncodegen/cli",
+	"bugs": {
+		"url": "https://github.com/jsoncodegen/cli/issues"
+	},
 	"dependencies": {
 		"glob": "^7.1.6",
 		"lodash": "^4.17.15",
