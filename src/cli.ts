@@ -48,9 +48,9 @@ async function main() {
 		const outputDir = path.resolve(argv.outputDir)
 		await rimraf(outputDir)
 		await mkdirp(outputDir)
-		const generator = getGenerator(argv.generator)
+		const generator = await getGenerator(argv.generator)
 		const config = argv.config
-			? require(path.resolve(process.cwd(), argv.config))
+			? await import(path.resolve(process.cwd(), argv.config))
 			: {}
 		const inputFiles = await glob('**/*.json', {
 			cwd: inputDir,

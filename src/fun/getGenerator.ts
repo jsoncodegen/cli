@@ -1,16 +1,16 @@
 import { IGenerator } from 'jsoncodegen-types-for-generator'
 import * as path from 'path'
 
-export function getGenerator(name: string): IGenerator {
+export async function getGenerator(name: string): Promise<IGenerator> {
 	let generator: IGenerator | null = null
 	if (!/[\\\/]/.test(name)) {
 		try {
-			generator = require(`jsoncodegen-generator-${name}`)
+			generator = (await import(`jsoncodegen-generator-${name}`)).generator
 		} catch (e) {}
 	}
 	if (!generator) {
 		try {
-			generator = require(path.resolve(process.cwd(), name))
+			generator = (await import(path.resolve(process.cwd(), name))).generator
 		} catch (e) {}
 	}
 	if (!generator) {

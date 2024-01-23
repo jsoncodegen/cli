@@ -305,7 +305,7 @@ You can configure the generator by providing a JavaScript file in the `--config`
 **jsoncodegen-generator-typescript.config.js**
 
 ```js
-module.exports = {
+export {
   // options
 }
 ```
@@ -339,7 +339,7 @@ interface IConfig {
   // ... any configuration
 }
 
-const generator: IGenerator = {
+export const generator: IGenerator = {
   async generate(config: IConfig, namedTypesById) {
     let result: IGeneratorResult[] = []
     for (const namedType of namedTypesById.values()) {
@@ -360,8 +360,6 @@ const generator: IGenerator = {
     return result
   },
 }
-
-module.exports = generator
 ```
 
 Also, https://github.com/jsoncodegen/test-json has sample JSON you can use to test the output of your generator. You can install the sample JSON like this:
@@ -375,5 +373,7 @@ npm i -D jsoncodegen-test-json
 MIT
 
 ## Version history
+
+1.1.0 require → import
 
 1.0.0 Initial version.
