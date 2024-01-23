@@ -1,4 +1,4 @@
-import { toRelativePath } from './toRelativePath'
+import { toRelativePath } from './toRelativePath.js'
 
 it('[q0ytsc]', () => {
 	expect(toRelativePath([], [])).toEqual([])

@@ -1,4 +1,4 @@
-import { pathFromString } from './pathFromString'
+import { pathFromString } from './pathFromString.js'
 
 it('[q0ytxt]', () => {
 	expect(pathFromString('a/b/c')).toEqual(['a', 'b', 'c'])

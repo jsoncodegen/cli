@@ -1,4 +1,4 @@
-import { pathBaseName } from './pathBaseName'
+import { pathBaseName } from './pathBaseName.js'
 
 it('[q0yvgh]', () => {
 	expect(() => pathBaseName([])).toThrow(/q0yv7h/)

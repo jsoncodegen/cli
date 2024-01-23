@@ -1,6 +1,6 @@
-import { InputEnum } from '../model/InputEnum'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { getMixinFields } from './getMixinFields'
+import { InputEnum } from '../model/InputEnum.js'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { getMixinFields } from './getMixinFields.js'
 
 export function getInputEnumValues({
 	json,

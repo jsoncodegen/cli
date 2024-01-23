@@ -1,4 +1,4 @@
-import { normalizePath } from './normalizePath'
+import { normalizePath } from './normalizePath.js'
 
 it('[q0yu6o]', () => {
 	expect(normalizePath(['a', 'b', 'c'])).toEqual(['a', 'b', 'c'])

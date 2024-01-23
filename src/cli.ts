@@ -1,21 +1,18 @@
 #!/usr/bin/env node
 
-import * as _glob from 'glob'
-import * as _mkdirp from 'mkdirp'
+import { glob } from 'glob'
+import { mkdirp } from 'mkdirp'
 import * as path from 'path'
-import * as _rimraf from 'rimraf'
-import * as util from 'util'
-import * as yargs from 'yargs'
-import { generatorResultToMap } from './fun/generatorResultToMap'
-import { getGenerator } from './fun/getGenerator'
-import { parse } from './fun/parse'
-import { readFiles } from './fun/readFiles'
-import { writeOutput } from './fun/writeOutput'
+import { rimraf } from 'rimraf'
+import { pathToFileURL } from 'url'
+import yargs from 'yargs'
+import { generatorResultToMap } from './fun/generatorResultToMap.js'
+import { getGenerator } from './fun/getGenerator.js'
+import { parse } from './fun/parse.js'
+import { readFiles } from './fun/readFiles.js'
+import { writeOutput } from './fun/writeOutput.js'
 
-const glob = util.promisify(_glob)
-const rimraf = util.promisify(_rimraf)
-const mkdirp = util.promisify(_mkdirp)
-const { argv } = yargs
+const argv = yargs(process.argv)
 	.option('generator', {
 		alias: ['g'],
 		type: 'string',
@@ -39,6 +36,7 @@ const { argv } = yargs
 		type: 'string',
 		description: 'Path to a JS config module for the generator.',
 	})
+	.parseSync()
 
 main()
 
@@ -50,11 +48,22 @@ async function main() {
 		await mkdirp(outputDir)
 		const generator = await getGenerator(argv.generator)
 		const config = argv.config
-			? await import(path.resolve(process.cwd(), argv.config))
+			? (
+					await import(
+						pathToFileURL(
+							path.resolve(
+								process.cwd(),
+								argv.config.endsWith('.js') ? argv.config : argv.config + '.js',
+							),
+						).toString()
+					)
+			  ).default
 			: {}
-		const inputFiles = await glob('**/*.json', {
-			cwd: inputDir,
-		})
+		const inputFiles = (
+			await glob('**/*.json', {
+				cwd: inputDir,
+			})
+		).map((it) => it.replaceAll('\\', '/'))
 		const json = await readFiles(inputDir, inputFiles)
 		const namedTypesById = parse(json)
 		const generatorResult = await generator.generate(config, namedTypesById)

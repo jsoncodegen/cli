@@ -4,15 +4,15 @@ import {
 	IStringEnum,
 	TNamedType,
 } from 'jsoncodegen-types-for-generator'
-import { InputEnum } from '../model/InputEnum'
-import { InputInterface } from '../model/InputInterface'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { pathBaseName } from '../path/pathBaseName'
-import { pathDirectory } from '../path/pathDirectory'
-import { isStringEnum } from './isStringEnum'
-import { parseInterfaceFields } from './parseInterfaceFields'
-import { parseNumberEnumFields } from './parseNumberEnumFields'
-import { parseStringEnumFields } from './parseStringEnumFields'
+import { InputEnum } from '../model/InputEnum.js'
+import { InputInterface } from '../model/InputInterface.js'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { pathBaseName } from '../path/pathBaseName.js'
+import { pathDirectory } from '../path/pathDirectory.js'
+import { isStringEnum } from './isStringEnum.js'
+import { parseInterfaceFields } from './parseInterfaceFields.js'
+import { parseNumberEnumFields } from './parseNumberEnumFields.js'
+import { parseStringEnumFields } from './parseStringEnumFields.js'
 
 export function parse(json: Map<string, TInputNamedType>) {
 	const result = new Map<string, TNamedType>()
@@ -87,9 +87,7 @@ export function parse(json: Map<string, TInputNamedType>) {
 						json,
 						enumSource: result,
 						declarationPath,
-						declaration: json.get(
-							declarationPath,
-						) as InputInterface,
+						declaration: json.get(declarationPath) as InputInterface,
 						interfaceType: declaration,
 					}),
 				}

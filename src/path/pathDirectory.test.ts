@@ -1,4 +1,4 @@
-import { pathDirectory } from './pathDirectory'
+import { pathDirectory } from './pathDirectory.js'
 
 it('[q0yw7p]', () => {
 	expect(() => pathDirectory([])).toThrow(/q0yw66/)

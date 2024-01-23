@@ -1,5 +1,5 @@
 import { TGeneratorResult } from 'jsoncodegen-types-for-generator'
-import * as _ from 'lodash'
+import { isArray, isNil, isObject, isString } from 'lodash-es'
 
 export function generatorResultToMap(generatorResult: TGeneratorResult) {
 	const result = new Map<string, string>()
@@ -7,15 +7,15 @@ export function generatorResultToMap(generatorResult: TGeneratorResult) {
 		for (const g of Array.isArray(generatorResult)
 			? generatorResult
 			: [generatorResult]) {
-			if (_.isNil(g)) {
+			if (isNil(g)) {
 				continue
 			}
-			if (!_.isObject(g)) {
+			if (!isObject(g)) {
 				throw new Error(
 					`[q0wtl2] Object expected for generated result. Got: ${typeof g}`,
 				)
 			}
-			if (!_.isArray(g.filePath)) {
+			if (!isArray(g.filePath)) {
 				throw new Error(
 					`[q0wtij] Array expected for path. Got: ${typeof g.filePath}`,
 				)
@@ -23,7 +23,7 @@ export function generatorResultToMap(generatorResult: TGeneratorResult) {
 			if (!g.filePath.length) {
 				throw new Error(`[q1bep7] Empty file path.`)
 			}
-			if (!_.isString(g.content)) {
+			if (!isString(g.content)) {
 				throw new Error(
 					`[q0wtnj] String expected for content. Got: ${typeof g.content}`,
 				)

@@ -3,10 +3,10 @@ import {
 	IInterfaceField,
 	TNamedType,
 } from 'jsoncodegen-types-for-generator'
-import { InputInterface } from '../model/InputInterface'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { getMixinFields } from './getMixinFields'
-import { unwrap } from './unwrap'
+import { InputInterface } from '../model/InputInterface.js'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { getMixinFields } from './getMixinFields.js'
+import { unwrap } from './unwrap.js'
 
 const whiteSpaceRe = /\s/
 

@@ -11,14 +11,14 @@ import {
 	TFieldType,
 	TNamedType,
 } from 'jsoncodegen-types-for-generator'
-import { normalizePath } from '../path/normalizePath'
-import { pathBaseName } from '../path/pathBaseName'
-import { pathDirectory } from '../path/pathDirectory'
-import { pathForceRelative } from '../path/pathForceRelative'
-import { pathFromString } from '../path/pathFromString'
-import { pathToString } from '../path/pathToString'
-import { resolvePath } from '../path/resolvePath'
-import { toRelativePath } from '../path/toRelativePath'
+import { normalizePath } from '../path/normalizePath.js'
+import { pathBaseName } from '../path/pathBaseName.js'
+import { pathDirectory } from '../path/pathDirectory.js'
+import { pathForceRelative } from '../path/pathForceRelative.js'
+import { pathFromString } from '../path/pathFromString.js'
+import { pathToString } from '../path/pathToString.js'
+import { resolvePath } from '../path/resolvePath.js'
+import { toRelativePath } from '../path/toRelativePath.js'
 
 const isNullableRe = /\?$/
 const isMapRe = /\{\}$/
@@ -74,17 +74,12 @@ export function unwrap({
 				pathFromString(fieldTypeString),
 			)
 			const typeFullPathWithField = fieldTypeString.startsWith('.')
-				? resolvePath(
-						interfaceType.directoryPath,
-						typeSpecifiedPathWithField,
-				  )
+				? resolvePath(interfaceType.directoryPath, typeSpecifiedPathWithField)
 				: typeSpecifiedPathWithField
 			const typeName = pathBaseName(typeFullPathWithField).split('.')
 			const typePath = pathDirectory(typeFullPathWithField)
 			const typeFullPath = [...typePath, typeName[0]]
-			const typeDeclaration = namedTypesById.get(
-				pathToString(typeFullPath),
-			)
+			const typeDeclaration = namedTypesById.get(pathToString(typeFullPath))
 			if (!typeDeclaration)
 				throw new Error(
 					`[q2cmbl] Type declaration not found: ${fieldTypeString} (at ${interfaceType.id})`,
@@ -109,8 +104,7 @@ export function unwrap({
 						const r: IStringEnumValueReference = {
 							kind: 'StringEnumValueReference',
 							targetId: typeDeclaration.id,
-							absoluteDirectoryPath:
-								typeDeclaration.directoryPath,
+							absoluteDirectoryPath: typeDeclaration.directoryPath,
 							relativeDirectoryPath,
 							isNullable,
 							name: typeDeclaration.name,
@@ -121,8 +115,7 @@ export function unwrap({
 						const r: IStringEnumReference = {
 							kind: 'StringEnumReference',
 							targetId: typeDeclaration.id,
-							absoluteDirectoryPath:
-								typeDeclaration.directoryPath,
+							absoluteDirectoryPath: typeDeclaration.directoryPath,
 							relativeDirectoryPath,
 							isNullable,
 							name: typeDeclaration.name,
@@ -135,8 +128,7 @@ export function unwrap({
 						const r: INumberEnumValueReference = {
 							kind: 'NumberEnumValueReference',
 							targetId: typeDeclaration.id,
-							absoluteDirectoryPath:
-								typeDeclaration.directoryPath,
+							absoluteDirectoryPath: typeDeclaration.directoryPath,
 							relativeDirectoryPath,
 							isNullable,
 							name: typeDeclaration.name,
@@ -147,8 +139,7 @@ export function unwrap({
 						const r: INumberEnumReference = {
 							kind: 'NumberEnumReference',
 							targetId: typeDeclaration.id,
-							absoluteDirectoryPath:
-								typeDeclaration.directoryPath,
+							absoluteDirectoryPath: typeDeclaration.directoryPath,
 							relativeDirectoryPath,
 							isNullable,
 							name: typeDeclaration.name,

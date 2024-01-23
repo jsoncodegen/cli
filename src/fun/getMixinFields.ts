@@ -1,10 +1,10 @@
-import * as _ from 'lodash'
-import { InputMixin } from '../model/InputMixin'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { pathDirectory } from '../path/pathDirectory'
-import { pathFromString } from '../path/pathFromString'
-import { pathToString } from '../path/pathToString'
-import { resolvePath } from '../path/resolvePath'
+import { isString } from 'lodash-es'
+import { InputMixin } from '../model/InputMixin.js'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { pathDirectory } from '../path/pathDirectory.js'
+import { pathFromString } from '../path/pathFromString.js'
+import { pathToString } from '../path/pathToString.js'
+import { resolvePath } from '../path/resolvePath.js'
 
 export function getMixinFields({
 	json,
@@ -17,14 +17,12 @@ export function getMixinFields({
 }) {
 	let mixinFields = {}
 	if (mixins) {
-		if (_.isString(mixins)) {
+		if (isString(mixins)) {
 			mixins = [mixins]
 		}
 		for (const mixin of mixins) {
 			if (!mixin) continue
-			const declarationDir = pathDirectory(
-				pathFromString(declarationPath),
-			)
+			const declarationDir = pathDirectory(pathFromString(declarationPath))
 			const mixinPath = pathFromString(mixin)
 			const canonicalMixinPath = mixin.startsWith('.')
 				? resolvePath(declarationDir, mixinPath)

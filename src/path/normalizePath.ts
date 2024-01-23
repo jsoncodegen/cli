@@ -1,4 +1,4 @@
-import * as lodash from 'lodash'
+import { range } from 'lodash-es'
 
 export function normalizePath(p: string[]) {
 	const result = p.slice()
@@ -16,8 +16,7 @@ export function normalizePath(p: string[]) {
 			}
 		}
 	}
-	return lodash
-		.range(upLevelsPending)
+	return range(upLevelsPending)
 		.map(() => '..')
 		.concat(result)
 }

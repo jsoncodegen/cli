@@ -1,6 +1,6 @@
-import { InputEnum } from '../model/InputEnum'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { getInputEnumValues } from './getInputEnumValues'
+import { InputEnum } from '../model/InputEnum.js'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { getInputEnumValues } from './getInputEnumValues.js'
 
 export function isStringEnum({
 	json,

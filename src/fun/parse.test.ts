@@ -15,8 +15,8 @@ import {
 	IStringEnumValueReference,
 	TFieldType,
 } from 'jsoncodegen-types-for-generator'
-import { TInputNamedType } from '../model/TInputNamedType'
-import { parse } from './parse'
+import { TInputNamedType } from '../model/TInputNamedType.js'
+import { parse } from './parse.js'
 
 it('[q1bkaj] Handles an empty interface.', () => {
 	const json = new Map<string, TInputNamedType>()
@@ -158,7 +158,8 @@ it('[q1bmgq] Handles interface field paths.', () => {
 	const expectedFoo = makeInterface({
 		directoryPath: ['some', 'folder'],
 		name: 'Foo',
-		fields: /* prettier-ignore */ [
+		fields:
+			/* prettier-ignore */ [
 			makeInterfaceInterfaceField({ name: 'inSameFolderAbs'   , interfaceName: 'InSameFolderAbs'   , absoluteDirectoryPath: ['some', 'folder'                ], relativeDirectoryPath : ['.'                 ] }),
 			makeInterfaceInterfaceField({ name: 'inSameFolderRel'   , interfaceName: 'InSameFolderRel'   , absoluteDirectoryPath: ['some', 'folder'                ], relativeDirectoryPath : ['.'                 ] }),
 			makeInterfaceInterfaceField({ name: 'inParentFolderAbs' , interfaceName: 'InParentFolderAbs' , absoluteDirectoryPath: ['some'                          ], relativeDirectoryPath : ['..'                ] }),
@@ -186,7 +187,8 @@ it('[q1bp34] Handles a string enum.', () => {
 	const result = parse(json)
 	const expectedFoo = makeStringEnum({
 		name: 'Foo',
-		values: /* prettier-ignore */ [
+		values:
+			/* prettier-ignore */ [
 			makeStringEnumValue({ name: 'NAME_1', value: 'VALUE_1' }),
 			makeStringEnumValue({ name: 'NAME_2', value: 'VALUE_2' }),
 		],
@@ -204,7 +206,8 @@ it('[q1bpqm] Handles a number enum.', () => {
 	const result = parse(json)
 	const expectedFoo = makeNumberEnum({
 		name: 'Foo',
-		values: /* prettier-ignore */ [
+		values:
+			/* prettier-ignore */ [
 			makeNumberEnumValue({ name: 'NAME_1', value: 1 }),
 			makeNumberEnumValue({ name: 'NAME_2', value: 2 }),
 		],
@@ -221,9 +224,7 @@ it('[q1bpsa] Handles a number enum field.', () => {
 	const result = parse(json)
 	const expectedFoo = makeInterface({
 		name: 'Foo',
-		fields: [
-			makeNumberEnumInterfaceField({ name: 'foo', enumName: 'Bar' }),
-		],
+		fields: [makeNumberEnumInterfaceField({ name: 'foo', enumName: 'Bar' })],
 	})
 	expect(result.size).toBe(2)
 	expect(result.get('Foo')).toEqual(expectedFoo)
@@ -238,9 +239,7 @@ it('[q1qiop] Handles a string enum field.', () => {
 	const result = parse(json)
 	const expectedFoo = makeInterface({
 		name: 'Foo',
-		fields: [
-			makeStringEnumInterfaceField({ name: 'foo', enumName: 'Bar' }),
-		],
+		fields: [makeStringEnumInterfaceField({ name: 'foo', enumName: 'Bar' })],
 	})
 	expect(result.size).toBe(2)
 	expect(result.get('Foo')).toEqual(expectedFoo)
@@ -368,7 +367,8 @@ it('[q1bqmc] Handles nullable fields.', () => {
 	const result = parse(json)
 	const expectedFoo = makeInterface({
 		name: 'Foo',
-		fields: /* prettier-ignore */ [
+		fields:
+			/* prettier-ignore */ [
 			makeInterfaceField({ name: 'nullable'                    , fieldType:                                                                                     makePrimitiveValue({ isNullable: true , name: 'boolean'       }) }),
 			makeInterfaceField({ name: 'arrayWithNull'               , fieldType:                                           makeArray({ isNullable: false, fieldType: makePrimitiveValue({ isNullable: true , name: 'boolean' })    }) }),
 			makeInterfaceField({ name: 'nullableArrayWithNull'       , fieldType:                                           makeArray({ isNullable: true , fieldType: makePrimitiveValue({ isNullable: true , name: 'boolean' })    }) }),
@@ -408,7 +408,8 @@ it('[q1br70] Handles an enum field with a description.', () => {
 	const result = parse(json)
 	const expectedFoo = makeStringEnum({
 		name: 'Foo',
-		values: /* prettier-ignore */ [
+		values:
+			/* prettier-ignore */ [
 			makeStringEnumValue({ name: 'NAME_1', value: 'VALUE_1', description: 'Description 1.' }),
 			makeStringEnumValue({ name: 'NAME_2', value: 'VALUE_2', description: 'Description 2.' }),
 		],

@@ -1,4 +1,4 @@
-import { findCommonRoot } from './findCommonRoot'
+import { findCommonRoot } from './findCommonRoot.js'
 
 it('[q0ytp0]', () => {
 	expect(findCommonRoot([], ['a', 'b', 'c'])) //

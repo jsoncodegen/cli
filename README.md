@@ -305,7 +305,7 @@ You can configure the generator by providing a JavaScript file in the `--config`
 **jsoncodegen-generator-typescript.config.js**
 
 ```js
-export {
+export default {
   // options
 }
 ```

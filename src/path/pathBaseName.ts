@@ -1,4 +1,4 @@
-import { normalizePath } from './normalizePath'
+import { normalizePath } from './normalizePath.js'
 
 export function pathBaseName(p: string[]) {
 	p = normalizePath(p)

@@ -1,9 +1,8 @@
 import * as fs from 'fs'
-import * as _mkdirp from 'mkdirp'
+import { mkdirp } from 'mkdirp'
 import * as path from 'path'
 import * as util from 'util'
 
-const mkdirp = util.promisify(_mkdirp)
 const writeFile = util.promisify(fs.writeFile)
 
 export async function writeOutput(outputDir: string, out: Map<string, string>) {
